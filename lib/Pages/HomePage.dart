@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:doctor_app/Pages/AddPrescription.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -38,6 +39,13 @@ class _HomePageState extends State<HomePage> {
         result = scanData;
         loadingResult = true;
       });
+
+      Future.delayed(Duration(seconds: 5), () {
+        setState(() {
+          loadingResult = false;
+        });
+      });
+
     });
   }
 
@@ -45,18 +53,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        backgroundColor: Colors.transparent,
       body: Stack(
         children: [
-          Expanded(child: QRView(
-            key: qrKey,
-            onQRViewCreated: _onQRViewCreated,
-            overlay: QrScannerOverlayShape(
-                borderColor: Colors.greenAccent
-            ),
-          ))
+          Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: Expanded(child: QRView(
+              key: qrKey,
+              onQRViewCreated: _onQRViewCreated,
+              overlay: QrScannerOverlayShape(
+                  borderColor: Colors.greenAccent
+              ),
+            )),
+          )
           , Center(
             child: loadingResult? CircularProgressIndicator.adaptive():Container(),
-          )
+          ),
+          FloatingActionButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddPrescription()));
+          })
         ],
       ),
       ),

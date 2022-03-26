@@ -13,11 +13,11 @@ class _AddPrescriptionState extends State<AddPrescription> {
   Widget build(BuildContext context) {
     BuildContext mainContext = context;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+
       body: Column(
         children: [
           Container(
-            height: 180.0,
+            height: MediaQuery.of(context).size.height * 0.23,
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(bottom: 60.0),
@@ -27,8 +27,11 @@ class _AddPrescriptionState extends State<AddPrescription> {
                     bottomLeft: Radius.circular(20.0),
                     bottomRight: Radius.circular(20.0))),
             child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Row(children: [
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.0072
+                ),
+                child: Row(
+                    children: [
                   IconButton(
                     icon: Icon(Icons.arrow_back_ios),
                     color: Colors.white,
